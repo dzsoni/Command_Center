@@ -62,6 +62,10 @@ template <typename T> class FunctionHolder:public IFunctionHolder
             {
                 std::apply(func, std::make_tuple(stringTolint(params[0])));
             }
+            else if constexpr (std::is_same_v<Func, ft_V_UI>)
+            {
+                std::apply(func, std::make_tuple(static_cast<unsigned int>(stringTolint(params[0]))));
+            }
             else if constexpr (std::is_same_v<Func, ft_V_UC>)
             {
                 std::apply(func, std::make_tuple(static_cast<unsigned char>(stringTolint(params[0]))));

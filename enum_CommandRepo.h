@@ -51,6 +51,7 @@ typedef std::vector<device_command_struct> vec_device_command_struct;
 
 typedef std::function<void(void)> ft_V_V;
 typedef std::function<void(int)> ft_V_I;
+typedef std::function<void(unsigned int)> ft_V_UI;
 typedef std::function<void(unsigned char)> ft_V_UC;
 typedef std::function<void(bool)> ft_V_B;
 typedef std::function<void(unsigned char, bool)> ft_V_UC_B;

@@ -14,6 +14,7 @@ build_flags = -D NO_NEED_XXX_COLLECTFUN
  NO_NEED_MQTTCOMMAND_COLLECTFUN
  NO_NEED_WIFIMANAGER_COLLECTFUN
  NO_NEED_CONTROLLOGICMANAGER_COLLECTFUN
+ NO_NEED_COUNTER_COLLECTFUN
  ..etc
 */
 
@@ -43,6 +44,10 @@ build_flags = -D NO_NEED_XXX_COLLECTFUN
 
 #ifndef NO_NEED_CONTROLLOGICMANAGER_COLLECTFUN
 #include "ControlLogicManager_collectFun.h"
+#endif
+
+#ifndef NO_NEED_COUNTER_COLLECTFUN
+#include "Counter_collectFun.h"
 #endif
 
 #endif 
