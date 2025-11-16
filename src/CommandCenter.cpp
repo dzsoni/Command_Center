@@ -73,8 +73,7 @@ void CommandCenter::processCommands()
         return;
     }
     String result = ifh->run(cs.args);
-    response_struct result_struct = {cs.msgid,result,cs.responsetaker_pt};
-    _responsequeue.push(result_struct);
+    _responsequeue.push({cs.msgid,result,cs.responsetaker_pt});
 }
 
 void CommandCenter::processResponse()
@@ -180,25 +179,29 @@ bool CommandCenter::isDevCommandExist(String devid,comm_tuple newcom)
     return false;
 }
 
-comm_tuple CommandCenter::getCommandTuple(String id, String command)
+comm_tuple CommandCenter::getCommandTuple(String userdeviceid, String command)
 {   
     if(_devicerepo.empty()) return std::make_tuple(nullptr,nullptr);
-
-    id.toUpperCase();
+    userdeviceid.toUpperCase();
     command.toUpperCase();
-    
-    for(device_command_struct element : _devicerepo)
+
+    for(auto it =_frequencyindextbl.begin();it!=_frequencyindextbl.end();it++)
     {   
-        String oid=element.id_by_user;
+        String oid=_devicerepo[*it].id_by_user;
         oid.toUpperCase();
-        if(oid==id)
+        if(oid==userdeviceid)
         {
-            for( comm_tuple func : element.device_commands)
+            for( comm_tuple func : _devicerepo[*it].device_commands)
             {
                 String ocommand=std::get<ENUM_COMTUPLEORDER_COMMAND>(func);
                 ocommand.toUpperCase();
                 if(ocommand == command )
                 {
+                    auto i=*it;
+                    _frequencyindextbl.remove(i);
+                    auto ptr=_frequencyindextbl.before_begin();
+                    _frequencyindextbl.insert_after(ptr,i);
+
                     return func;     
                 }
             }
@@ -414,6 +417,7 @@ void CommandCenter::addDevice(device_command_struct newdev)
         }
     }
     _COMMANDCENT_PL("New device " + String(newdev.devicetype) + " added to repo.");
+    _frequencyindextbl.push_front(_devicerepo.size());
     _devicerepo.push_back(newdev);
 }
 

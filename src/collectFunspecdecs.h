@@ -50,4 +50,4 @@ build_flags = -D NO_NEED_XXX_COLLECTFUN
 #include "Counter_collectFun.h"
 #endif
 
-#endif 
+#endif /* COLLECTFUNSPECDECS_H */

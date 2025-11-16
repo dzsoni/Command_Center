@@ -1,6 +1,7 @@
 #ifndef IRESPONSETAKER_H
 #define IRESPONSETAKER_H
 
+#include <WString.h>
 
 class IResponseTaker
 {

@@ -8,6 +8,8 @@
 #include <vector>
 #include "enum_CommandRepo.h"
 #include "FunctionHolder.h"
+#include <forward_list>
+
 
 /*
 if you don't need any collectFun, please define NO_NEED_XXX_COLLECTFUN in your compile option in platformio.ini
@@ -56,6 +58,7 @@ private:
     std::queue<rawcommand_struct, std::list<rawcommand_struct>> _rawcommands;
     std::list<command_struct> _commands;
     std::queue<response_struct, std::list<response_struct>> _responsequeue;
+    std::forward_list<unsigned int> _frequencyindextbl;
 
     
     void processRawCommands();
