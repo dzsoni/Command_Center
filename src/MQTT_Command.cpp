@@ -26,7 +26,6 @@ void MQTT_Command::onConnectCB(bool sessionpresent)
 MQTT_Command::MQTT_Command(IMQTTMediator *mymqttmediator, CommandCenter &mycommandcenter, String pathtojson):_mycommandcenter(mycommandcenter),_pathtojson(pathtojson)
 {
     if(mymqttmediator==nullptr)return;
-    loadMQTTCommandsettings();
     
     MedClient::setMQTTMediator(mymqttmediator);
 
